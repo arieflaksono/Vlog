@@ -1,0 +1,5 @@
+{
+  "name": "aplikasi video vlog",
+  "description": "A YouTube video submission portal for students that validates video privacy settings (Public/Unlisted) using the YouTube Data API and provides AI-powered encouragement.",
+  "requestFramePermissions": []
+}
