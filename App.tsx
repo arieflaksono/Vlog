@@ -18,7 +18,6 @@ import {
   logoutAdmin,
   subscribeToAuth
 } from './services/firebase';
-import { User } from 'firebase/auth'; // Type definition
 
 const App: React.FC = () => {
   // State untuk Data

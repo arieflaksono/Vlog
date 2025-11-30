@@ -5,14 +5,11 @@ export const generateEncouragingFeedback = async (studentName: string, videoTitl
   const defaultMessage = "Tugas berhasil diterima! Semangat terus berkarya.";
 
   try {
-    // SAFETY CHECK: Access process.env safely to prevent browser crashes
-    let apiKey: string | undefined;
-    if (typeof process !== 'undefined' && process.env) {
-      apiKey = process.env.API_KEY;
-    }
+    // GUIDELINE FIX: API Key must be obtained exclusively from process.env.API_KEY
+    const apiKey = process.env.API_KEY;
 
     if (!apiKey) {
-      console.warn("API Key not found, returning default feedback.");
+      console.warn("API Key not found in Environment Variables (API_KEY). Returning default feedback.");
       return defaultMessage;
     }
 

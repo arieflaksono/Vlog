@@ -1,4 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+import * as firebaseApp from "firebase/app";
 import { 
   getFirestore, 
   collection, 
@@ -12,14 +12,8 @@ import {
   Timestamp,
   writeBatch,
   getDocs
-} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
-import { 
-  getAuth, 
-  signInWithEmailAndPassword, 
-  signOut, 
-  onAuthStateChanged,
-  User
-} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+} from "firebase/firestore";
+import * as firebaseAuth from "firebase/auth";
 import { StudentSubmission } from "../types";
 
 const firebaseConfig = {
@@ -33,23 +27,23 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app = firebaseApp.initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const auth = getAuth(app);
+const auth = firebaseAuth.getAuth(app);
 const COLLECTION_NAME = "submissions";
 
 // --- AUTHENTICATION SERVICES ---
 
 export const loginAdmin = async (email, password) => {
-  return await signInWithEmailAndPassword(auth, email, password);
+  return await firebaseAuth.signInWithEmailAndPassword(auth, email, password);
 };
 
 export const logoutAdmin = async () => {
-  return await signOut(auth);
+  return await firebaseAuth.signOut(auth);
 };
 
-export const subscribeToAuth = (callback: (user: User | null) => void) => {
-  return onAuthStateChanged(auth, callback);
+export const subscribeToAuth = (callback: (user: any | null) => void) => {
+  return firebaseAuth.onAuthStateChanged(auth, callback);
 };
 
 // --- FIRESTORE SERVICES ---
